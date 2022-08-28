@@ -16,7 +16,7 @@ function GameScreen() {
   return (
     <View style={styles.screen}>
       <Title>Opponent's Guess</Title>
-      {/* GUESS */}
+      {/* YOUR GUESS HERE */}
       <View>
         <Text>Higher or lower?</Text>
         <Text>+ - </Text>
