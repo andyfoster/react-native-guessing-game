@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Alert, StyleSheet, Text, View } from 'react-native';
 
 import Title from '../components/ui/Title';
+import PrimaryButton from '../components/ui/PrimaryButton';
 import NumberContainer from '../components/game/NumberContainer';
 
 function generateRandomBetween(min, max, exclude) {
@@ -14,9 +15,43 @@ function generateRandomBetween(min, max, exclude) {
   }
 }
 
+let minBoundary = 1;
+let maxBoundary = 100;
+
 function GameScreen({ userNumber }) {
-  const initialGuess = generateRandomBetween(1, 100, userNumber);
+  const initialGuess = generateRandomBetween(
+    minBoundary,
+    maxBoundary,
+    userNumber
+  );
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
+
+  function nextGuessHandler(direction) {
+    if (
+      (direction === 'lower' && currentGuess < userNumber) ||
+      (direction === 'higher' && currentGuess > userNumber)
+    ) {
+      Alert.alert('Incorrect button', "I'll never guess it that way", [
+        {
+          text: 'Sorry',
+          style: 'cancel',
+        },
+      ]);
+      return;
+    }
+
+    if (direction === 'lower') {
+      maxBoundary = currentGuess;
+    } else {
+      minBoundary = currentGuess + 1;
+    }
+    const newRandNumber = generateRandomBetween(
+      minBoundary,
+      maxBoundary,
+      currentGuess
+    );
+    setCurrentGuess(newRandNumber);
+  }
 
   return (
     <View style={styles.screen}>
@@ -25,6 +60,14 @@ function GameScreen({ userNumber }) {
       <NumberContainer>{initialGuess}</NumberContainer>
       <View>
         <Text>Higher or lower?</Text>
+        <View style={styles.buttonsContainer}>
+          <PrimaryButton onPress={nextGuessHandler.bind(this, 'higher')}>
+            +
+          </PrimaryButton>
+          <PrimaryButton onPress={nextGuessHandler.bind(this, 'lower')}>
+            -
+          </PrimaryButton>
+        </View>
         <Text>+ - </Text>
       </View>
       <View>
@@ -41,4 +84,5 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
   },
+  buttonsContainer: {},
 });
