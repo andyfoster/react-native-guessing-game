@@ -38,6 +38,5 @@ const styles = StyleSheet.create({
   },
   backgroundImage: {
     opacity: 0.35,
-    height: 100%,
   },
 });

@@ -14,6 +14,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     borderWidth: 2,
     borderColor: 'white',
+    borderStartColor: 'blue',
+    borderEndColor: 'red',
     padding: 12,
   },
 });
