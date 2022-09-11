@@ -58,6 +58,7 @@ function GameScreen({ userNumber, onGameOver }) {
     } else {
       minBoundary = currentGuess + 1;
     }
+
     const newRandNumber = generateRandomBetween(
       minBoundary,
       maxBoundary,
@@ -72,7 +73,7 @@ function GameScreen({ userNumber, onGameOver }) {
   return (
     <View style={styles.screen}>
       <Title>Opponent's Guess ({userNumber})</Title>
-      <NumberContainer>{initialGuess}</NumberContainer>
+      <NumberContainer>{currentGuess}</NumberContainer>
       <Card>
         <InstructionText style={styles.instructionText}>
           Higher or lower?
