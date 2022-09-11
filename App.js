@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, ImageBackground, SafeAreaView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useFonts } from 'expo-font';
-import AppLoading from 'expo-app-loading';
+import * as SplashScreen from 'expo-splash-screen';
 
 import StartGameScreen from './screens/StartGameScreen';
 import GameScreen from './screens/GameScreen';
@@ -18,8 +18,21 @@ export default function App() {
     'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
   });
 
+  useEffect(() => {
+    async function prepare() {
+      await SplashScreen.preventAutoHideAsync();
+    }
+    prepare();
+  }, []);
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return null;
   }
 
   function pickedNumberHandler(pickedNumber) {
@@ -63,7 +76,9 @@ export default function App() {
         style={styles.rootScreen}
         imageStyle={styles.backgroundImage}
       >
-        <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
+        <SafeAreaView style={styles.rootScreen} onLayout={onLayoutRootView}>
+          {screen}
+        </SafeAreaView>
       </ImageBackground>
     </LinearGradient>
   );
