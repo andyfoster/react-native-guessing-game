@@ -50,11 +50,20 @@ export default function App() {
     setGuessRounds(0);
   }
 
+  function resetGameHandler() {
+    setUserNumber(null);
+    setGuessRounds(0);
+  }
+
   let screen = <StartGameScreen onPickNumber={pickedNumberHandler} />;
 
   if (userNumber) {
     screen = (
-      <GameScreen userNumber={userNumber} onGameOver={gameOverHandler} />
+      <GameScreen
+        userNumber={userNumber}
+        onGameOver={gameOverHandler}
+        onResetHandler={resetGameHandler}
+      />
     );
   }
 

@@ -23,7 +23,7 @@ function generateRandomBetween(min, max, exclude) {
 let minBoundary = 1;
 let maxBoundary = 100;
 
-function GameScreen({ userNumber, onGameOver }) {
+function GameScreen({ userNumber, onGameOver, onResetHandler }) {
   const initialGuess = generateRandomBetween(1, 100, userNumber);
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
   const [guessRounds, setGuessRounds] = useState([initialGuess]);
@@ -103,6 +103,15 @@ function GameScreen({ userNumber, onGameOver }) {
           keyExtractor={(item) => item}
         />
       </View>
+      <View>
+        <PrimaryButton
+          onPress={onResetHandler}
+          textStyle={styles.resetGameText}
+          style={styles.resetGameButton}
+        >
+          Reset Game
+        </PrimaryButton>
+      </View>
     </View>
   );
 }
@@ -126,5 +135,9 @@ const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
     padding: 16,
+  },
+  resetGameText: {},
+  resetGameButton: {
+    backgroundColor: 'transparent',
   },
 });
