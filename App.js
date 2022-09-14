@@ -1,5 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
-import { StyleSheet, ImageBackground, SafeAreaView } from 'react-native';
+import {
+  Appearance,
+  StyleSheet,
+  ImageBackground,
+  SafeAreaView,
+} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
@@ -12,6 +17,14 @@ export default function App() {
   const [userNumber, setUserNumber] = useState();
   const [gameIsOver, setGameIsOver] = useState(true);
   const [guessRounds, setGuessRounds] = useState(0);
+
+  const colorScheme = Appearance.getColorScheme();
+
+  let background = require('./assets/images/background.jpg');
+
+  if (colorScheme === 'light') {
+    background = require('./assets/images/success.png');
+  }
 
   const [fontsLoaded] = useFonts({
     'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
@@ -80,7 +93,7 @@ export default function App() {
   return (
     <LinearGradient colors={['#4e0329', '#000000']} style={styles.rootScreen}>
       <ImageBackground
-        source={require('./assets/images/background.jpg')}
+        source={background}
         resizeMode="cover"
         style={styles.rootScreen}
         imageStyle={styles.backgroundImage}
