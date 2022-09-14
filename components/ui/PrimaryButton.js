@@ -1,4 +1,5 @@
 import { View, Text, Pressable, StyleSheet } from 'react-native';
+import * as Haptics from 'expo-haptics';
 
 import Colors from '../../constants/colors';
 
@@ -11,7 +12,10 @@ function PrimaryButton({ children, onPress, style, textStyle }) {
             ? [styles.buttonInnerContainer, styles.pressed, style]
             : [styles.buttonInnerContainer, style]
         }
-        onPress={onPress}
+        onPress={() => {
+          onPress();
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+        }}
         android_ripple={{ color: Colors.primary600 }}
       >
         <Text style={[styles.buttonText, textStyle]}>{children}</Text>
