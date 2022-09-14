@@ -1,10 +1,14 @@
 import { Image, Text, StyleSheet, View } from 'react-native';
 
+import * as Haptics from 'expo-haptics';
+
 import Title from '../components/ui/Title';
 import Colors from '../constants/colors';
 import PrimaryButton from '../components/ui/PrimaryButton';
 
 function GameOverScreen({ roundsNumber, userNumber, onStartNewGame }) {
+  Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+
   return (
     <View style={styles.rootContainer}>
       <Title>Game Over!</Title>

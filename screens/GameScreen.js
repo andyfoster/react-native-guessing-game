@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Alert, FlatList, StyleSheet, Text, View } from 'react-native';
 
+import * as Haptics from 'expo-haptics';
 import { Ionicons } from '@expo/vector-icons';
 
 import Title from '../components/ui/Title';
@@ -44,6 +45,7 @@ function GameScreen({ userNumber, onGameOver, onResetHandler }) {
       (direction === 'lower' && currentGuess < userNumber) ||
       (direction === 'higher' && currentGuess > userNumber)
     ) {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
       Alert.alert('Incorrect button', "I'll never guess it that way", [
         {
           text: 'Sorry',
