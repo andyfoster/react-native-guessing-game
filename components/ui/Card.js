@@ -11,7 +11,6 @@ export default Card;
 const styles = StyleSheet.create({
   card: {
     alignItems: 'center',
-    justifyContent: 'center',
     marginTop: 36,
     marginHorizontal: 24,
     padding: 16,
