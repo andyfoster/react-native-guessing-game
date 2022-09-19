@@ -74,7 +74,9 @@ function GameScreen({ userNumber, onGameOver, onResetHandler }) {
 
   return (
     <View style={styles.screen}>
-      <Title>Opponent's Guess ({userNumber})</Title>
+      <Title>
+        Opponent's Guess <Text style={styles.aside}>({userNumber})</Text>
+      </Title>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card>
         <InstructionText style={styles.instructionText}>
@@ -124,9 +126,14 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     padding: 24,
+    alignItems: 'center',
   },
   instructionText: {
     marginBottom: 22,
+  },
+  aside: {
+    color: 'lightgrey',
+    fontSize: 18,
   },
   buttonsContainer: {
     flexDirection: 'row',
