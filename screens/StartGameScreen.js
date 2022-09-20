@@ -1,4 +1,4 @@
-import { View, TextInput, StyleSheet, Alert } from 'react-native';
+import { View, TextInput, StyleSheet, Alert, Dimensions } from 'react-native';
 import { useState } from 'react';
 
 import PrimaryButton from '../components/ui/PrimaryButton';
@@ -72,10 +72,12 @@ function StartGameScreen({ onPickNumber }) {
 
 export default StartGameScreen;
 
+const deviceHeight = Dimensions.get('window').height;
+
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-    marginTop: 100,
+    marginTop: deviceHeight < 380 ? 30 : 100,
     alignItems: 'center',
   },
   resetButton: {
