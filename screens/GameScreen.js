@@ -86,7 +86,7 @@ function GameScreen({ userNumber, onGameOver, onResetHandler }) {
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card>
         <InstructionText style={styles.instructionText}>
-          Higher or lower?
+          Higher or lower than {currentGuess}?
         </InstructionText>
         <View style={styles.buttonsContainer}>
           <View style={styles.buttonContainer}>
@@ -129,7 +129,8 @@ function GameScreen({ userNumber, onGameOver, onResetHandler }) {
   return (
     <View style={styles.screen}>
       <Title>
-        Opponent's Guess <Text style={styles.aside}>({userNumber})</Text>
+        Computer's Guess{' '}
+        <Text style={styles.aside}>(trying to guess {userNumber})</Text>
       </Title>
       {content}
       <View style={styles.listContainer}>
