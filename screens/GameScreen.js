@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import {
   Alert,
+  Button,
   FlatList,
   StyleSheet,
   Text,
@@ -49,6 +50,15 @@ function GameScreen({ userNumber, onGameOver, onResetHandler }) {
     maxBoundary = 100;
   }, []);
 
+  function myNumberAlert() {
+    Alert.alert('We All Forget Sometimes', `Your number is ${userNumber}`, [
+      {
+        text: 'Thanks',
+        style: 'cancel',
+      },
+    ]);
+  }
+
   function nextGuessHandler(direction) {
     if (
       (direction === 'lower' && currentGuess < userNumber) ||
@@ -86,7 +96,7 @@ function GameScreen({ userNumber, onGameOver, onResetHandler }) {
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card>
         <InstructionText style={styles.instructionText}>
-          Higher or lower than {currentGuess}?
+          Should I guess higher or lower?
         </InstructionText>
         <View style={styles.buttonsContainer}>
           <View style={styles.buttonContainer}>
@@ -128,11 +138,9 @@ function GameScreen({ userNumber, onGameOver, onResetHandler }) {
 
   return (
     <View style={styles.screen}>
-      <Title>
-        Computer's Guess{' '}
-        <Text style={styles.aside}>(trying to guess {userNumber})</Text>
-      </Title>
+      <Title>Computer's Guess</Title>
       {content}
+      <Button onPress={myNumberAlert} title={'forgot number?'} />
       <View style={styles.listContainer}>
         <FlatList
           data={guessRounds}
@@ -168,6 +176,7 @@ const styles = StyleSheet.create({
   },
   instructionText: {
     marginBottom: 22,
+    textAlign: 'center',
   },
   buttonsContainerWide: {
     flexDirection: 'row',
